@@ -26,6 +26,7 @@ productRouter.post(
       rating: 0,
       numReviews: 0,
       description: 'sample description',
+      disponible:false
     });
     const product = await newProduct.save();
     res.send({ message: 'Product Created', product });
@@ -34,8 +35,8 @@ productRouter.post(
 
 productRouter.put(
   '/:id',
-  isAuth,
-  isAdmin,
+   isAuth,
+  isAdmin, 
   expressAsyncHandler(async (req, res) => {
     const productId = req.params.id;
     const product = await Product.findById(productId);
@@ -49,6 +50,7 @@ productRouter.put(
       product.brand = req.body.brand;
       product.countInStock = req.body.countInStock;
       product.description = req.body.description;
+      product.disponible=req.body.disponible;
       await product.save();
       res.send({ message: 'Product Updated' });
     } else {
@@ -56,6 +58,25 @@ productRouter.put(
     }
   })
 );
+productRouter.put(
+  '/:id/disponible',
+/*   isAuth,
+  isAdmin, */
+  expressAsyncHandler(async (req, res) => {
+    const productId = req.params.id;
+    const product = await Product.findById(productId);
+    if (product) {
+      
+      product.disponible=!product.disponible
+  
+      await product.save();
+      res.send({success:true});
+    } else {
+      res.status(404).send({ message: 'Product Not Found' });
+    }
+  })
+);
+ 
 
 productRouter.delete(
   '/:id',

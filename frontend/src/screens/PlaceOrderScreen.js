@@ -11,7 +11,7 @@ import { toast } from 'react-toastify';
 import { getError } from '../utils';
 import { Store } from '../Store';
 import CheckoutSteps from '../components/CheckoutSteps';
-import LoadingBox from '../components/LoadingBox';
+
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -75,7 +75,7 @@ export default function PlaceOrderScreen() {
 
   
   return (
-    <div>
+    <div style={{marginTop:'100px'}}>
       <CheckoutSteps step2 step4></CheckoutSteps>
       <Helmet>
         <title>Commande</title>
@@ -87,13 +87,13 @@ export default function PlaceOrderScreen() {
             <Card.Body>
               <Card.Title>Livraison</Card.Title>
               <Card.Text>
-                <strong>nom et prenom:</strong> {cart.shippingAddress.fullName} <br />
+                <strong>Nom et prénom:</strong> {cart.shippingAddress.fullName} <br />
                 <strong>Adresse: </strong> {cart.shippingAddress.address},
                 {cart.shippingAddress.city}, {cart.shippingAddress.postalCode},
                 {cart.shippingAddress.country}<br/>
                 <strong>Tel :</strong>{cart.shippingAddress.tel}
               </Card.Text>
-              <Link to="/shipping">modifier</Link>
+              <Link to="/shipping">Modifier</Link>
             </Card.Body>
           </Card>
 
@@ -117,12 +117,12 @@ export default function PlaceOrderScreen() {
                       <Col md={3}>
                         <span>{item.quantity}</span>
                       </Col>
-                      <Col md={3}>{item.price} dt</Col>
+                      <Col md={3}>{item.price.toFixed(3)} </Col>
                     </Row>
                   </ListGroup.Item>
                 ))}
               </ListGroup>
-              <Link to="/cart">modifier</Link>
+              <Link to="/cart">Modifier</Link>
             </Card.Body>
           </Card>
         </Col>
@@ -134,13 +134,13 @@ export default function PlaceOrderScreen() {
                 <ListGroup.Item>
                   <Row>
                     <Col>Produit</Col>
-                    <Col>{cart.itemsPrice.toFixed(2)} dt</Col>
+                    <Col>{cart.itemsPrice.toFixed(3)} </Col>
                   </Row>
                 </ListGroup.Item>
                 <ListGroup.Item>
                   <Row>
                     <Col>Livraison</Col>
-                    <Col> 5.00 dt</Col>
+                    <Col> 5.000 </Col>
                   </Row>
                 </ListGroup.Item>
                 <ListGroup.Item>
@@ -149,18 +149,26 @@ export default function PlaceOrderScreen() {
                       <strong> Total de la commande</strong>
                     </Col>
                     <Col>
-                      <strong>{cart.totalPrice.toFixed(2)} dt</strong>
+                      <strong>{cart.totalPrice.toFixed(3)} </strong>
                     </Col>
                   </Row>
                 </ListGroup.Item>
                 <ListGroup.Item>
-                  <div className="d-grid">
+                  <div className="d-grid" style={{gap:'30px'}}>
                     <Button
                       type="button"
                       onClick={placeOrderHandler}
                       disabled={cart.cartItems.length === 0}
                     >
                       Passer la commande
+                    </Button>
+                    <Button
+                      type="button"
+                      variant="primary"
+                     onClick={()=>{navigate('/shipping')}}
+                      
+                    >
+                      Retour
                     </Button>
                   </div>
                   

@@ -1,7 +1,7 @@
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import { Link } from 'react-router-dom';
-import Rating from './Rating';
+
 import axios from 'axios';
 import { useContext } from 'react';
 import { Store } from '../Store';
@@ -34,18 +34,18 @@ function Product(props) {
       <Link to={`/product/${product.slug}`}>
         <img  src={product.image} className="card-img-top" alt={product.name} />
       </Link>
-      <Card.Body >
+      <Card.Body style={{textAlign:'center'}} >
         <Link to={`/product/${product.slug}`}>
-          <Card.Title>{product.name}</Card.Title>
+          <Card.Title style={{textDecoration:'none'}}><h2>{product.name}</h2></Card.Title>
         </Link>
         {/* <Rating rating={product.rating} numReviews={product.numReviews} /> */}
-        <Card.Text>{product.price} </Card.Text>
+        <Card.Text><h3>{product.price.toFixed(3)} </h3></Card.Text>
         
           <Card.Text>{product?.description}</Card.Text>
         
-        {product.countInStock === 0 ? (
+        {(product.disponible===false)? (
           <Button variant="light" disabled>
-            Out of stock
+            N'EST PAS DISPONIBLE
           </Button>
         ) : (
           <Button variant="primary" bg='primary' onClick={() => addToCartHandler(product)}>Ajouter au panier</Button>

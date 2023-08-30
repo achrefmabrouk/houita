@@ -5,7 +5,7 @@ import axios from 'axios';
 import { Store } from '../Store';
 import { getError } from '../utils';
 import Container from 'react-bootstrap/Container';
-import ListGroup from 'react-bootstrap/ListGroup';
+
 import Form from 'react-bootstrap/Form';
 import { Helmet } from 'react-helmet-async';
 import LoadingBox from '../components/LoadingBox';
@@ -61,6 +61,8 @@ export default function ProductEditScreen() {
   const [images, setImages] = useState([]);
   const [brand, setBrand] = useState('');
   const [description, setDescription] = useState('');
+  const [category, setCategory] = useState('');
+  const [disponible, setDisponible] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -72,7 +74,10 @@ export default function ProductEditScreen() {
         setPrice(data.price);
         setImage(data.image);
         setImages(data.images);
+        setCategory(data.category)
         setDescription(data.description);
+        setDisponible(data.disponible);
+
         dispatch({ type: 'FETCH_SUCCESS' });
       } catch (err) {
         dispatch({
@@ -97,7 +102,9 @@ export default function ProductEditScreen() {
           price,
           image,
           images,
+          category,
           description,
+          disponible,
         },
         {
           headers: { Authorization: `Bearer ${userInfo.token}` },
@@ -145,8 +152,10 @@ export default function ProductEditScreen() {
     setImages(images.filter((x) => x !== fileName));
     toast.success("Image supprimée avec succés. cliquez sur Modifier pour l'appliquer");
   };
+ 
+  
   return (
-    <Container className="small-container">
+    <Container className="small-container" style={{marginTop:'100px'}}>
       <Helmet>
         <title>Modifier le produit ${productId}</title>
       </Helmet>
@@ -161,9 +170,10 @@ export default function ProductEditScreen() {
           <Form.Group className="mb-3" controlId="name">
             <Form.Label>Produit</Form.Label>
             <Form.Control
-              value={name}
+             // value={name}
               onChange={(e) => setName(e.target.value)}
               required
+              defaultValue={name}
             />
           </Form.Group>
           <Form.Group className="mb-3" controlId="slug">
@@ -177,30 +187,43 @@ export default function ProductEditScreen() {
           <Form.Group className="mb-3" controlId="name">
             <Form.Label>Prix/kg</Form.Label>
             <Form.Control
-              value={price}
+           //   value={price}
               onChange={(e) => setPrice(e.target.value)}
               required
+              defaultValue={price}
             />
           </Form.Group>
           <Form.Group className="mb-3" controlId="imageFile">
             <Form.Label>Télécharger l'image</Form.Label>
-            <Form.Control type="file" onChange={uploadFileHandler} />
+            
+            <Form.Control type="file" onChange={uploadFileHandler}
+          
+            />
+             {image && <img style={{width:'30px'}} src={image} alt="Selected" />}
             {loadingUpload && <LoadingBox></LoadingBox>}
           </Form.Group>
+          <Form.Group className="mb-3" controlId="category">
+            <Form.Label>Categories</Form.Label>
+            <Form.Control
+             // value={category}
+              onChange={(e) => setCategory(e.target.value)}
+              required
+              defaultValue={category}
+            />
+          </Form.Group>
 
-       
-  
           <Form.Group className="mb-3" controlId="description">
             <Form.Label>Description</Form.Label>
             <Form.Control
-              value={description}
+              //value={description}
               onChange={(e) => setDescription(e.target.value)}
-              //required
+              defaultValue={description}
+              required
             />
           </Form.Group>
           <div className="mb-3">
             <Button disabled={loadingUpdate} type="submit">
-              Modifer
+              Confirmer
             </Button>
             {loadingUpdate && <LoadingBox></LoadingBox>}
           </div>

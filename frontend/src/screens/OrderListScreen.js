@@ -9,6 +9,7 @@ import MessageBox from '../components/MessageBox';
 import { Store } from '../Store';
 import { getError } from '../utils';
 
+
 const reducer = (state, action) => {
   switch (action.type) {
     case 'FETCH_REQUEST':
@@ -112,10 +113,9 @@ export default function OrderListScreen() {
       }
     }
   };
-
   
   return (
-    <div>
+    <div style={{marginTop:'100px'}}>
       <Helmet>
         <title>Commandes</title>
       </Helmet>
@@ -148,7 +148,7 @@ export default function OrderListScreen() {
                 
 
              
-                <td>
+                <td style={{display:'flex'}}>
                   <Button
                     type="button"
                     variant="light"
@@ -174,8 +174,8 @@ export default function OrderListScreen() {
     
                     Delivrer
                   </Button>
-                  {order.isDelivered?`✔ ${order.deliveredAt.substring(0, 19)
-}`:'❌'}
+                  {order.isDelivered?`✔ ${order.deliveredAt.substring(0, 19)}`:'❌'}
+
                 </td>
               </tr>
             ))}

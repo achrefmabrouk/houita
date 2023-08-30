@@ -5,7 +5,7 @@ import Button from 'react-bootstrap/Button';
 import { useNavigate } from 'react-router-dom';
 import { Store } from '../Store';
 import CheckoutSteps from '../components/CheckoutSteps';
-import PlaceOrderScreen from './PlaceOrderScreen';
+
 
 export default function ShippingAddressScreen() {
   const navigate = useNavigate();
@@ -66,7 +66,7 @@ export default function ShippingAddressScreen() {
   
     return (
     
-      <div>
+      <div style={{marginTop:'100px'}}>
         <Helmet>
           <title>Livraison</title>
         </Helmet>
@@ -111,9 +111,16 @@ export default function ShippingAddressScreen() {
               />
             </Form.Group>
             
-            <div className="mb-3">
+            <div className="mb-3" >
               <Button variant="primary" type="submit">
                 Continuez
+              </Button>
+              <Button 
+              style={{marginLeft:'30px'}}
+              variant="primary"
+              onClick={()=>{navigate('/cart')}}
+              >
+                Retour
               </Button>
             </div>
           </Form>

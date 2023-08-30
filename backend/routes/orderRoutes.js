@@ -29,7 +29,7 @@ orderRouter.post(
       taxPrice: req.body.taxPrice,
       totalPrice: req.body.totalPrice,
       tel:req.body.tel
-      //user: req.user._id,
+      
     });
 
     const order = await newOrder.save();
@@ -119,48 +119,7 @@ orderRouter.put(
   })
 );
 
-/* orderRouter.put(
-  '/:id/pay',
-  expressAsyncHandler(async (req, res) => {
-    const order = await Order.findById(req.params.id).populate(
-      'user',
-      'email name'
-    );
-    if (order) {
-      order.isPaid = true;
-      order.paidAt = Date.now();
-      order.paymentResult = {
-        id: req.body.id,
-        status: req.body.status,
-        update_time: req.body.update_time,
-        email_address: req.body.email_address,
-      };
 
-      const updatedOrder = await order.save();
-      mailgun()
-        .messages()
-        .send(
-          {
-            from: 'Amazona <amazona@mg.yourdomain.com>',
-            to: `${order.user.name} <${order.user.email}>`,
-            subject: `New order ${order._id}`,
-            html: payOrderEmailTemplate(order),
-          },
-          (error, body) => {
-            if (error) {
-              console.log(error);
-            } else {
-              console.log(body);
-            }
-          }
-        );
-
-      res.send({ message: 'Order Paid', order: updatedOrder });
-    } else {
-      res.status(404).send({ message: 'Order Not Found' });
-    }
-  })
-); */
 
 orderRouter.delete(
   '/:id',
@@ -176,5 +135,13 @@ orderRouter.delete(
     }
   })
 );
+orderRouter.delete('/items' ,isAuth,isAdmin, async (req, res) => {
+  try {
+    await Item.deleteMany({ checked: true });
+    res.status(200).json({ message: 'Suppression réussie' });
+  } catch (err) {
+    res.status(500).json({ error: 'Erreur lors de la suppression des éléments' });
+  }
+});
 
 export default orderRouter;

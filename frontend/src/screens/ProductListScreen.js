@@ -1,6 +1,6 @@
-import React, { useContext, useEffect, useReducer } from 'react';
+import React, { useContext, useEffect, useReducer, useState } from 'react';
 import axios from 'axios';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
@@ -9,6 +9,7 @@ import { Store } from '../Store';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
 import { getError } from '../utils';
+
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -47,8 +48,17 @@ const reducer = (state, action) => {
 
     case 'DELETE_RESET':
       return { ...state, loadingDelete: false, successDelete: false };
+    
+      case 'dispo_request':
+        return { ...state, loadingdispo: true, successdispo: false };
+      case 'dispo_success':
+        return { ...state, loadingdispo: false, successdispo: true };
+  
+      case 'dispo_fail':
+        return { ...state, loadingdispo: false}  
     default:
       return state;
+      
   }
 };
 
@@ -62,6 +72,8 @@ export default function ProductListScreen() {
       loadingCreate,
       loadingDelete,
       successDelete,
+      loadingdispo,
+      successdispo
     },
     dispatch,
   ] = useReducer(reducer, {
@@ -134,9 +146,26 @@ export default function ProductListScreen() {
       }
     }
   };
-
+  const HandleDispo= async (product) =>{
+    try {
+      dispatch({ type: 'dispo_request' });
+        await axios.put(`/api/products/${product._id}/disponible`, {
+          headers: { Authorization: `Bearer ${userInfo.token}` },
+        });
+        
+        dispatch({ type: 'dispo_success' });
+        setTimeout(()=>{
+          window.location.reload()},1)
+    } catch (error) {
+      toast.error(getError(error));
+      dispatch({
+        type: 'dispo_fail',
+      });
+    }
+  }
+ 
   return (
-    <div>
+    <div style={{marginTop:'150px'}}>
       <Row>
         <Col>
           <h1>Mes produits</h1>
@@ -163,9 +192,10 @@ export default function ProductListScreen() {
             <thead>
               <tr>
                 <th>ID</th>
-                <th>produit</th>
-                <th>prix</th>
-                <th>evenement</th>
+                <th>Produit</th>
+                <th>Prix</th>
+                <th>Disponibilité</th>
+                <th>Evenement</th>
               </tr>
             </thead>
             <tbody>
@@ -174,6 +204,14 @@ export default function ProductListScreen() {
                   <td>{product._id}</td>
                   <td>{product.name}</td>
                   <td>{product.price}</td>
+                  <td> <Button
+                    type="button"
+                    variant="light"
+                     onClick={() => HandleDispo(product)}
+                  >
+                    DISPO/INDISPO
+                  </Button>
+                  {product.disponible?'✔':'❌'}</td>
                  
                   <td>
                     <Button
@@ -191,6 +229,7 @@ export default function ProductListScreen() {
                     >
                       Supprimer
                     </Button>
+    
                   </td>
                 </tr>
               ))}

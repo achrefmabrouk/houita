@@ -1,5 +1,5 @@
 const data = {
-  products: [
+  /* products: [
     {
       name: 'Nike Slim shirt',
       slug: 'nike-slim-shirt',
@@ -48,6 +48,6 @@ const data = {
       numReviews: 10,
       description: 'high quality product',
     },
-  ],
+  ], */
 };
 export default data;

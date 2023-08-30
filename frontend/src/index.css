@@ -11,6 +11,7 @@ body {
 }
 main {
   flex: 1;
+  
 }
 .btn-primary,
 .btn-outline-primary {
@@ -82,4 +83,14 @@ main {
 .text-bold {
   font-weight: bold;
 }
+
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: #ffffff;
+  z-index: 1000; /* Assurez-vous que le z-index est supérieur à celui des autres éléments de la page */
+}
+
 

@@ -121,7 +121,7 @@ function ProductScreen() {
   ) : error ? (
     <MessageBox variant="danger">{error}</MessageBox>
   ) : (
-    <div>
+    <div style={{marginTop:'100px'}}>
       <Row>
         <Col md={6}>
           <img
@@ -140,7 +140,7 @@ function ProductScreen() {
             </ListGroup.Item>
           
             
-            <ListGroup.Item>Prix: {product.price}</ListGroup.Item>
+            <ListGroup.Item style={{fontWeight:'bold'}}>Prix: {product.price.toFixed(3)}</ListGroup.Item>
             <ListGroup.Item>
               <Row xs={1} md={2} className="g-2">
                 {[product.image, ...product.images].map((x) => (
@@ -159,9 +159,12 @@ function ProductScreen() {
                 ))}
               </Row>
             </ListGroup.Item>
-            <ListGroup.Item>
+            <ListGroup.Item style={{fontWeight:'bold'}}>
               Description:
               <p>{product.description}</p>
+            </ListGroup.Item>
+            <ListGroup.Item style={{fontWeight:'bold'}}>
+              {(product.disponible)?<p style={{color:'green'}}>DISPONIBLE</p>:<p style={{color:'red'}}>N'EST PAS DISPONIBLE</p>}
             </ListGroup.Item>
           </ListGroup>
         </Col>
@@ -179,10 +182,18 @@ function ProductScreen() {
 {/* 
                 {product.countInStock > 0 && ( */}
                   <ListGroup.Item>
-                    <div className="d-grid">
+                    <div className="d-grid"  style={{gap:'30px'}}>
                       <Button onClick={addToCartHandler} variant="primary">
                         Ajouter au panier
                       </Button>
+                      <Button
+                      type="button"
+                      variant="primary"
+                     onClick={()=>{navigate('/')}}
+                      
+                    >
+                      Retour
+                    </Button>
                     </div>
                   </ListGroup.Item>
               {/*   )} */}

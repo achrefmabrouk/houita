@@ -7,7 +7,7 @@ import { Helmet } from "react-helmet-async";
 import LoadingBox from "../components/LoadingBox";
 import MessageBox from "../components/MessageBox";
 import SearchBox from "../components/SearchBox";
-// import data from '../data';
+
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -28,7 +28,7 @@ function HomeScreen() {
     loading: true,
     error: "",
   });
-  // const [products, setProducts] = useState([]);
+  
   useEffect(() => {
     const fetchData = async () => {
       dispatch({ type: "FETCH_REQUEST" });
@@ -39,16 +39,15 @@ function HomeScreen() {
         dispatch({ type: "FETCH_FAIL", payload: err.message });
       }
 
-      // setProducts(result.data);
     };
     fetchData();
   }, []);
   return (
-    <div>
+    <div style={{marginTop:'100px'}}>
       <Helmet>
         <title>HOUITA  | حويته </title>
       </Helmet>
-      <div style={{display:'flex',justifyContent:'space-between'}} >
+      <div style={{display:'flex',justifyContent:'space-between',marginTop:'160px'}} >
       <h1>PRODUITS</h1>
       <div style={{display:'flex',justifyContent:'end',marginBottom:'50px'}}>
       <SearchBox />

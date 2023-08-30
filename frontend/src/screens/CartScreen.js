@@ -35,9 +35,10 @@ export default function CartScreen() {
   const checkoutHandler = () => {
     navigate('/shipping');
   };
-
+  
+  
   return (
-    <div>
+    <div style={{marginTop:'100px'}}>
       <Helmet>
         <title>Panier</title>
       </Helmet>
@@ -82,7 +83,7 @@ export default function CartScreen() {
                         <i className="fas fa-plus-circle"></i>
                       </Button>
                     </Col>
-                    <Col md={3}>dt{item.price}</Col>
+                    <Col md={3}>{item.price.toFixed(3)}</Col>
                     <Col md={2}>
                       <Button
                         onClick={() => removeItemHandler(item)}
@@ -103,13 +104,13 @@ export default function CartScreen() {
               <ListGroup variant="flush">
                 <ListGroup.Item>
                   <h3>
-                    total ({cartItems.reduce((a, c) => a + c.quantity, 0)}{' '}
-                    articles) : dt
-                    {cartItems.reduce((a, c) => a + c.price * c.quantity, 0)}
+                    Total ({cartItems.reduce((a, c) => a + c.quantity, 0)}{' '}
+                    articles): 
+                    {cartItems.reduce((a, c) => a + c.price * c.quantity, 0).toFixed(3)}
                   </h3>
                 </ListGroup.Item>
                 <ListGroup.Item>
-                  <div className="d-grid">
+                  <div className="d-grid" style={{gap:'30px'}}>
                     <Button
                       type="button"
                       variant="primary"
@@ -117,6 +118,14 @@ export default function CartScreen() {
                       disabled={cartItems.length === 0}
                     >
                       Passez à la confirmation
+                    </Button>
+                    <Button
+                      type="button"
+                      variant="primary"
+                     onClick={()=>{navigate('/')}}
+                      
+                    >
+                      Retour
                     </Button>
                   </div>
                 </ListGroup.Item>

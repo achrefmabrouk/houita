@@ -6,7 +6,7 @@ import { getError } from '../utils';
 import { Helmet } from 'react-helmet-async';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import Rating from '../components/Rating';
+
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
 import Button from 'react-bootstrap/Button';
@@ -49,7 +49,7 @@ const prices = [
   },
 ];
 
-export const ratings = [
+/* export const ratings = [
   {
     name: '4stars & up',
     rating: 4,
@@ -69,7 +69,7 @@ export const ratings = [
     name: '1stars & up',
     rating: 1,
   },
-];
+]; */
 
 export default function SearchScreen() {
   const navigate = useNavigate();
@@ -130,9 +130,9 @@ export default function SearchScreen() {
     }category=${filterCategory}&query=${filterQuery}&price=${filterPrice}&rating=${filterRating}&order=${sortOrder}&page=${filterPage}`;
   };
   return (
-    <div>
+    <div >
       <Helmet>
-        <title>recherche</title>
+        <title>Recherche</title>
       </Helmet>
       <Row>
         <Col md={3}>
@@ -152,17 +152,17 @@ export default function SearchScreen() {
                 
               </Row>
               {products.length === 0 && (
-                <MessageBox>aucun produit</MessageBox>
+                <MessageBox >Aucun produit</MessageBox>
               )}
 
-              <Row>
+              <Row style={{marginTop:'100px'}}>
                 {products.map((product) => (
                   <Col sm={6} lg={4} className="mb-3" key={product._id}>
                     <Product product={product}></Product>
                   </Col>
                 ))}
               </Row>
-
+              
               <div>
                 {[...Array(pages).keys()].map((x) => (
                   <LinkContainer
@@ -179,8 +179,17 @@ export default function SearchScreen() {
                     >
                       {x + 1}
                     </Button>
+                    
                   </LinkContainer>
                 ))}
+                 <Button
+                      type="button"
+                      variant="primary"
+                     onClick={()=>{navigate('/')}}
+                      
+                    >
+                      Retour
+                    </Button>
               </div>
             </>
           )}

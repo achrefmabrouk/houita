@@ -51,7 +51,7 @@ export default function DashboardScreen() {
   }, [userInfo]);
 
   return (
-    <div>
+    <div style={{marginTop:'100px'}}>
       <h1>Dashboard</h1>
       {loading ? (
         <LoadingBox />

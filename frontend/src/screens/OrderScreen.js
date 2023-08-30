@@ -158,7 +158,7 @@ export default function OrderScreen() {
                       <Col md={3}>
                         <span>{item.quantity}</span>
                       </Col>
-                      <Col md={3}>{item.price}dt</Col>
+                      <Col md={3}>{item.price.toFixed(3)}</Col>
                     </Row>
                   </ListGroup.Item>
                 ))}
@@ -174,7 +174,7 @@ export default function OrderScreen() {
                 <ListGroup.Item>
                   <Row>
                     <Col>Produits</Col>
-                    <Col>{order.itemsPrice.toFixed(2)}dt</Col>
+                    <Col>{order.itemsPrice.toFixed(2)}</Col>
                   </Row>
                 </ListGroup.Item>
                 <ListGroup.Item>
@@ -190,7 +190,7 @@ export default function OrderScreen() {
                       <strong>Commande en totale</strong>
                     </Col>
                     <Col>
-                      <strong>{order.totalPrice.toFixed(2)}dt</strong>
+                      <strong>{order.totalPrice.toFixed(2)}</strong>
                     </Col>
                   </Row>
                 </ListGroup.Item>
