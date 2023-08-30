@@ -7,6 +7,10 @@ import { isAuth, isAdmin, generateToken, baseUrl, mailgun } from '../utils.js';
 
 const userRouter = express.Router();
 
+userRouter.get('/test', (req, res) => { 
+  res.send('Hello World');
+});
+
 userRouter.get(
   '/',
   isAuth,
