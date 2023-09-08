@@ -27,7 +27,19 @@ function Product(props) {
       payload: { ...item, quantity },
     });
   };
+////
 
+const updateCartHandler = async (item, quantity) => {
+  const { data } = await axios.get(`/api/products/${item._id}`);
+  if (data.countInStock < quantity) {
+    window.alert('Sorry. Product is out of stock');
+    return;
+  }
+  ctxDispatch({
+    type: 'CART_ADD_ITEM',
+    payload: { ...item, quantity },
+  });
+};
   return (
  
     <Card  >
@@ -35,8 +47,8 @@ function Product(props) {
         <img  src={product.image} className="card-img-top" alt={product.name} />
       </Link>
       <Card.Body style={{textAlign:'center'}} >
-        <Link to={`/product/${product.slug}`}>
-          <Card.Title style={{textDecoration:'none'}}><h2>{product.name}</h2></Card.Title>
+        <Link style={{textDecoration:'none'}} to={`/product/${product.slug}`}>
+          <Card.Title ><h2>{product.name}</h2></Card.Title>
         </Link>
         {/* <Rating rating={product.rating} numReviews={product.numReviews} /> */}
         <Card.Text><h3>{product.price.toFixed(3)} </h3></Card.Text>
@@ -48,8 +60,13 @@ function Product(props) {
             N'EST PAS DISPONIBLE
           </Button>
         ) : (
-          <Button variant="primary" bg='primary' onClick={() => addToCartHandler(product)}>Ajouter au panier</Button>
-        )}
+           <Button variant="primary" bg='primary' onClick={() => addToCartHandler(product)}>
+            Ajouter au panier
+           </Button> 
+           
+        ) 
+  
+        }
       </Card.Body>
     </Card>
     

@@ -20,12 +20,13 @@ productRouter.post(
       slug: 'sample-name-' + Date.now(),
       image: '/images/p1.jpg',
       price: 0,
-      category: 'sample category',
+      category: 'CATEGORIE',
+      image_category:'/images/p2.jpg',
       brand: 'sample brand',
       countInStock: 0,
       rating: 0,
       numReviews: 0,
-      description: 'sample description',
+      description: 'DECRIRE',
       disponible:false
     });
     const product = await newProduct.save();
@@ -47,6 +48,7 @@ productRouter.put(
       product.image = req.body.image;
       product.images = req.body.images;
       product.category = req.body.category;
+      product.imagecategory = req.body.imagecategory;
       product.brand = req.body.brand;
       product.countInStock = req.body.countInStock;
       product.description = req.body.description;

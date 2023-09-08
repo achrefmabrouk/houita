@@ -14,13 +14,15 @@ import { Store } from './Store';
 import CartScreen from './screens/CartScreen';
 import SigninScreen from './screens/SigninScreen';
 import ShippingAddressScreen from './screens/ShippingAddressScreen';
-
+import HomeCategories from './screens/HomeCategories'
 import Button from 'react-bootstrap/Button';
 
 import PlaceOrderScreen from './screens/PlaceOrderScreen';
 import OrderScreen from './screens/OrderScreen';
 import { getError } from './utils';
 import axios from 'axios';
+
+import Card from 'react-bootstrap/Card';
 
 import ProfileScreen from './screens/ProfileScreen';
 
@@ -37,6 +39,8 @@ import UserEditScreen from './screens/UserEditScreen';
 
 
 import Modal from 'react-bootstrap/Modal';
+import NavBar from './components/NavBar';
+import SearchBox from './components/SearchBox';
 
 
 function App() {
@@ -85,10 +89,7 @@ function App() {
   }, []);
 
 
-  const [show, setShow] = useState(false);
-
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  
   return (
     <BrowserRouter>
       <div
@@ -118,7 +119,7 @@ function App() {
             <Nav.Item style={{color:'black', marginTop:'30px'}}>
               <strong ><h1 style={{color:'black',backgroundColor:'white'}}>Categories</h1></strong>
             </Nav.Item>
-            {categories.map((category) => (
+           {/*  {categories.map((category) => (
               <Nav.Item key={category} >
                 <LinkContainer
                   to={{ pathname: '/search', search: `category=${category}` }}
@@ -130,37 +131,21 @@ function App() {
                 
               </Nav.Item>
               
-            ))}
+            ))} */}
+              <Nav.Item >
+              
+                  <Nav.Link as={Link} to="/HomeCategories" >POISSONS EN TRANCHE</Nav.Link>
+                  <Nav.Link as={Link} to="/HomeCategories" >FRUITS DE MER</Nav.Link>
+                  <Nav.Link as={Link} to="/HomeCategories" >POISSONS BLEUS</Nav.Link>
+                  <Nav.Link as={Link} to="/HomeCategories" >POISSONS BLANCS</Nav.Link>
+                  <Nav.Link as={Link} to="/homescreen" >Tous nos produits</Nav.Link>
+                  
+                  
+               
+                
+              </Nav.Item>
              <Nav.Item style={{color:'black', marginTop:'30px'}}>
-             <div>
-       <Button variant="primary" onClick={handleShow}>
-        QUI SOMMES NOUS ?
-      </Button>
-
-      <Modal
-        show={show}
-        onHide={handleClose}
-        backdrop="static"
-        keyboard={false}
-      >
-        <Modal.Header closeButton>
-          <Modal.Title>QUI SOMMES NOUS ?</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-        Nous sommes un site de vente  en ligne  des produits de Mer frais  🐟🎣 . <br></br>
-
-Nous mettons à votre service une équipe de professionnels forte de plus que 20 ans d’expérience pouvant répondre à toute vos exigences .<br></br>
-
-Avec nos sauvages journaliers de poissons , crustacés , coquillages et fruits de mer nous pouvons vous proposer une grande diversité de produits .
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Fermer
-          </Button>
-          
-        </Modal.Footer>
-      </Modal>
-    </div>
+             
             </Nav.Item>
             
           </Nav>
@@ -227,7 +212,7 @@ Avec nos sauvages journaliers de poissons , crustacés , coquillages et fruits d
         <Container>
         
         
-<LinkContainer to="/">
+{/* <LinkContainer to="/"> */}
             <Navbar.Brand>
               <div style={{display:'flex',justifyContent:'space-between'}}> 
               <Button style={{display:'flex',justifyContent:'flex-start', backgroundColor:'#0D6EFD', borderColor:'#0D6EFD'}}
@@ -236,32 +221,28 @@ Avec nos sauvages journaliers de poissons , crustacés , coquillages et fruits d
               >
                 <i className="fas fa-bars"></i>
               </Button>
+              
               {/* HOUITA  | حويته  */}
+            
+              <img style={{width:'20%'}} src='houita_logo.png'alt='logo'></img>
               
-              <img style={{width:'30%'}} src='houita_logo.png'alt='logo'></img>
               
-               
-                  
-                   
-              </div>
-            </Navbar.Brand>
-          </LinkContainer> 
-
-          
-              </Container>
-              <div style={{textAlign:'end'}}>
-                  <Navbar.Toggle aria-controls="basic-navbar-nav"> 
-          <Link to="/cart" className="nav-link">
-              &#128722;
+              <Navbar.Toggle aria-controls="basic-navbar-nav"> 
+              
+          {/* <Link to="/cart" className="nav-link"> */}
+            <i class="fas fa-bars"></i>
                 {cart.cartItems.length > 0 && (
                   <Badge pill bg="danger">
                     {cart.cartItems.reduce((a, c) => a + c.quantity, 0)}
                   </Badge>
                 )}
-              </Link>
+              {/* </Link> */}
+              
             </Navbar.Toggle> 
+            
             <Navbar.Collapse id="basic-navbar-nav">
-            <Nav className="me-auto  w-100  justify-content-end">
+              
+            <Nav className="me-auto  w-100  justify-content-end"><SearchBox />
             <Link to="/cart" className="nav-link">
                   &#128722;
                     {cart.cartItems.length > 0 && (
@@ -270,9 +251,19 @@ Avec nos sauvages journaliers de poissons , crustacés , coquillages et fruits d
                       </Badge>
                     )}
                   </Link>
+                  
               </Nav>
               </Navbar.Collapse>
                   </div>
+                  
+            </Navbar.Brand>
+            
+          {/* </LinkContainer> 
+           */}
+          
+              </Container>
+              
+         
           </Navbar>
           
           )}
@@ -286,6 +277,8 @@ Avec nos sauvages journaliers de poissons , crustacés , coquillages et fruits d
               <Route path="/cart" element={<CartScreen />} />
               <Route path="/search" element={<SearchScreen />} />
               <Route path="/admin" element={<SigninScreen />} />
+              <Route path="/homescreen" element={<HomeScreen />} />
+              <Route path="/navbar" element={<NavBar/>} />
               
 
               <Route
@@ -355,12 +348,78 @@ Avec nos sauvages journaliers de poissons , crustacés , coquillages et fruits d
                   </AdminRoute>
                 }
               ></Route>
-
-              <Route path="/" element={<HomeScreen />} />
+              <Route path="/" element={<HomeCategories/>} />
+              
             </Routes>
           </Container>
         </main>
-        <footer>
+        <footer >
+          <div style={{display:'flex',justifyContent:'center',flexWrap:'wrap'}}>
+          <div>
+          <Card style={{ width: '18rem',gap:'20px',marginTop:'10px',marginLeft:'10px' }}>
+      
+      <Card.Body>
+        <Card.Title>QUI SOMMES NOUS ?</Card.Title>
+        <Card.Text>
+   
+        Nous sommes un site de vente  en ligne  des produits de Mer frais  🐟🎣 . <br></br>
+
+Nous mettons à votre service une équipe de professionnels forte de plus que 20 ans d’expérience pouvant répondre à toute vos exigences .<br></br>
+
+Avec nos sauvages journaliers de poissons , crustacés , coquillages et fruits de mer nous pouvons vous proposer une grande diversité de produits .
+<br/>
+
+        </Card.Text>
+       
+      </Card.Body>
+    </Card>
+          </div>
+          <div>
+          <Card style={{ width: '18rem',gap:'15px',marginTop:'10px',marginLeft:'10px' }}>
+      
+      <Card.Body>
+        <Card.Title>CONTACTEZ-NOUS</Card.Title>
+        <Card.Text>
+          <ul >
+            <img src='phone_logo.png'></img>
+            <p>+216 21660662 </p>
+           <img src='mail_logo.png'></img>
+           <p>houita.pro@gmail.com </p>
+           <img src='facebook_logo.png'></img>
+           <p>HOUITA  | حويته </p>
+           <img src='insta_logo.png'></img>
+           <p>HOUITA  | حويته </p>
+          </ul>
+        
+       
+        </Card.Text>
+       
+      </Card.Body>
+    </Card>
+          </div>
+          <div>
+          <Card style={{ width: '18rem',gap:'15px',marginTop:'10px',marginLeft:'10px' }}>
+      
+      <Card.Body>
+        <Card.Title>
+          <img src='livraison.png'></img>
+          <p>LIVRAISON À DOMICILE (le jour même)</p>
+        </Card.Title>
+        <Card.Title>
+          <img src='Qualite.png'></img>
+          <p>QUALITÉ GARANTIE</p>
+        </Card.Title>
+        <Card.Title>
+          <img src='Service.png'></img>
+          <p>SERVICE CLIENT 6/7 (sauf les lundis)</p>
+        </Card.Title>
+       
+       
+      </Card.Body>
+    </Card>
+          </div>
+          </div>
+         
           <div className="text-center">All rights reserved</div>
         </footer>
       </div>

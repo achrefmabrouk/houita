@@ -38,7 +38,7 @@ export default function CartScreen() {
   
   
   return (
-    <div style={{marginTop:'100px'}}>
+    <div style={{marginTop:'130px'}}>
       <Helmet>
         <title>Panier</title>
       </Helmet>

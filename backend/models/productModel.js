@@ -26,6 +26,7 @@ const productSchema = new mongoose.Schema(
     numReviews: { type: Number},
     reviews: [reviewSchema],
     disponible:{ type: Boolean, default: false},
+    imagecategory:{type:String},
   },
   {
     timestamps: true,

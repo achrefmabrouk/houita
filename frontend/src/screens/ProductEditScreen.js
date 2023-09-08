@@ -62,6 +62,7 @@ export default function ProductEditScreen() {
   const [brand, setBrand] = useState('');
   const [description, setDescription] = useState('');
   const [category, setCategory] = useState('');
+  const [imagecategory, setImagecategory] = useState('');
   const [disponible, setDisponible] = useState(false);
 
   useEffect(() => {
@@ -77,6 +78,7 @@ export default function ProductEditScreen() {
         setCategory(data.category)
         setDescription(data.description);
         setDisponible(data.disponible);
+        setImagecategory(data.imagecategory,)
 
         dispatch({ type: 'FETCH_SUCCESS' });
       } catch (err) {
@@ -103,6 +105,7 @@ export default function ProductEditScreen() {
           image,
           images,
           category,
+          imagecategory,
           description,
           disponible,
         },
@@ -153,8 +156,32 @@ export default function ProductEditScreen() {
     toast.success("Image supprimée avec succés. cliquez sur Modifier pour l'appliquer");
   };
  
-  
-  return (
+  const uploadFileHandlerCat = async (e, imagecategory) => {
+    const file = e.target.files[0];
+    const bodyFormData = new FormData();
+    bodyFormData.append('file', file);
+    try {
+      dispatch({ type: 'UPLOAD_REQUEST' });
+      const { data } = await axios.post('/api/upload', bodyFormData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+          authorization: `Bearer ${userInfo.token}`,
+        },
+      });
+      dispatch({ type: 'UPLOAD_SUCCESS' });
+
+      if (imagecategory) {
+        setImagecategory([...imagecategory, data.secure_url]);
+      } else {
+        setImagecategory(data.secure_url);
+      }
+      toast.success("Image ajoutée avec succés. cliquez sur Modifier pour l'appliquer");
+    } catch (err) {
+      toast.error(getError(err));
+      dispatch({ type: 'UPLOAD_FAIL', payload: getError(err) });
+    }
+  };
+  return ( 
     <Container className="small-container" style={{marginTop:'100px'}}>
       <Helmet>
         <title>Modifier le produit ${productId}</title>
@@ -176,14 +203,14 @@ export default function ProductEditScreen() {
               defaultValue={name}
             />
           </Form.Group>
-          <Form.Group className="mb-3" controlId="slug">
+{/*           <Form.Group className="mb-3" controlId="slug">
             <Form.Label>ID</Form.Label>
             <Form.Control
               value={slug}
               onChange={(e) => setSlug(e.target.value)}
               required
             />
-          </Form.Group>
+          </Form.Group> */}
           <Form.Group className="mb-3" controlId="name">
             <Form.Label>Prix/kg</Form.Label>
             <Form.Control
@@ -211,6 +238,15 @@ export default function ProductEditScreen() {
               defaultValue={category}
             />
           </Form.Group>
+{/*           <Form.Group className="mb-3" controlId="imageFile">
+            <Form.Label>Télécharger l'image</Form.Label>
+            
+            <Form.Control type="file" onChange={uploadFileHandlerCat}
+          
+            />
+             {image && <img style={{width:'30px'}} src={image} alt="Selected" />}
+            {loadingUpload && <LoadingBox></LoadingBox>}
+          </Form.Group> */}
 
           <Form.Group className="mb-3" controlId="description">
             <Form.Label>Description</Form.Label>

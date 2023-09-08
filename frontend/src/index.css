@@ -5,6 +5,9 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  font-family: loretta-display, serif;
+font-style: normal;
+font-weight: 200;
 }
 .site-container {
   min-height: 100vh;
@@ -93,4 +96,18 @@ header {
   z-index: 1000; /* Assurez-vous que le z-index est supérieur à celui des autres éléments de la page */
 }
 
+footer {
+  background-color:#0D6EFD
+}
+.horizontal-scroll-container {
+  width: 100%; /* Largeur du conteneur */
+  overflow: hidden; /* Masquer le défilement vertical */
+  margin-top: 20px;
+}
 
+.content {
+  white-space: nowrap; /* Empêcher le texte de passer à la ligne */
+}
+.lien{
+  color: #000000;
+}

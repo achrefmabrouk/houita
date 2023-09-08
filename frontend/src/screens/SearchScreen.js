@@ -151,10 +151,11 @@ export default function SearchScreen() {
                 
                 
               </Row>
+              <div style={{marginTop:'100px'}}>
               {products.length === 0 && (
                 <MessageBox >Aucun produit</MessageBox>
               )}
-
+              </div>
               <Row style={{marginTop:'100px'}}>
                 {products.map((product) => (
                   <Col sm={6} lg={4} className="mb-3" key={product._id}>
@@ -182,7 +183,7 @@ export default function SearchScreen() {
                     
                   </LinkContainer>
                 ))}
-                 <Button
+                 <Button style={{marginBottom:'30px'}}
                       type="button"
                       variant="primary"
                      onClick={()=>{navigate('/')}}

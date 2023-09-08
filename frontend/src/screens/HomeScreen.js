@@ -47,12 +47,12 @@ function HomeScreen() {
       <Helmet>
         <title>HOUITA  | حويته </title>
       </Helmet>
-      <div style={{display:'flex',justifyContent:'space-between',marginTop:'160px'}} >
-      <h1>PRODUITS</h1>
-      <div style={{display:'flex',justifyContent:'end',marginBottom:'50px'}}>
-      <SearchBox />
+      
+      
+      <div style={{display:'flex',justifyContent:'center',marginBottom:'50px',width:'100%'}}>
+      
       </div>
-      </div>
+      
       <div className="products">
         {loading ? (
           <LoadingBox />
