@@ -41,7 +41,7 @@ import UserEditScreen from './screens/UserEditScreen';
 import Modal from 'react-bootstrap/Modal';
 import NavBar from './components/NavBar';
 import SearchBox from './components/SearchBox';
-
+import { Helmet } from 'react-helmet';
 
 function App() {
   const { state, dispatch: ctxDispatch } = useContext(Store);
@@ -103,6 +103,12 @@ function App() {
             : 'site-container d-flex flex-column'
         }
       >
+        <Helmet>
+       
+        <meta name="description" content="Nous sommes un site de vente  en ligne  des produits de Mer frais.Nous mettons à votre service une équipe de professionnels forte de plus que 20 ans d’expérience pouvant répondre à toute vos exigences.
+Avec nos sauvages journaliers de poissons , crustacés , coquillages et fruits de mer nous pouvons vous proposer une grande diversité de produits ." />
+       <meta name="keywords" content="houita,poisson, ventre poisson en ligne"></meta>
+      </Helmet>
         <ToastContainer position="bottom-center" limit={1} />
         <header>
         {showPopup && (
