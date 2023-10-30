@@ -43,6 +43,7 @@ import NavBar from './components/NavBar';
 import SearchBox from './components/SearchBox';
 import { Helmet } from 'react-helmet';
 
+
 function App() {
   const { state, dispatch: ctxDispatch } = useContext(Store);
   const { fullBox, cart, userInfo } = state;
@@ -125,7 +126,7 @@ Avec nos sauvages journaliers de poissons , crustacés , coquillages et fruits d
             <Nav.Item style={{color:'black', marginTop:'30px'}}>
               <strong ><h1 style={{color:'black',backgroundColor:'white'}}>Categories</h1></strong>
             </Nav.Item>
-           {/*  {categories.map((category) => (
+             {categories.map((category) => (
               <Nav.Item key={category} >
                 <LinkContainer
                   to={{ pathname: '/search', search: `category=${category}` }}
@@ -137,8 +138,8 @@ Avec nos sauvages journaliers de poissons , crustacés , coquillages et fruits d
                 
               </Nav.Item>
               
-            ))} */}
-              <Nav.Item >
+            ))} 
+{/*               <Nav.Item >
               
                   <Nav.Link as={Link} to="/HomeCategories" >POISSONS EN TRANCHE</Nav.Link>
                   <Nav.Link as={Link} to="/HomeCategories" >FRUITS DE MER</Nav.Link>
@@ -149,7 +150,7 @@ Avec nos sauvages journaliers de poissons , crustacés , coquillages et fruits d
                   
                
                 
-              </Nav.Item>
+              </Nav.Item> */}
              <Nav.Item style={{color:'black', marginTop:'30px'}}>
              
             </Nav.Item>
@@ -285,6 +286,7 @@ Avec nos sauvages journaliers de poissons , crustacés , coquillages et fruits d
               <Route path="/admin" element={<SigninScreen />} />
               <Route path="/homescreen" element={<HomeScreen />} />
               <Route path="/navbar" element={<NavBar/>} />
+              
               
 
               <Route

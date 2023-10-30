@@ -36,6 +36,17 @@ const reducer = (state, action) => {
       };
     case 'UPLOAD_FAIL':
       return { ...state, loadingUpload: false, errorUpload: action.payload };
+      case 'UPLOADIMGCAT_REQUEST':
+      return { ...state, loadingUpload: true, errorUpload: '' };
+    case 'UPLOADIMGCAT_SUCCESS':
+      return {
+        ...state,
+        loadingUpload: false,
+        errorUpload: '',
+      };
+    case 'UPLOADIMGCAT_FAIL':
+      return { ...state, loadingUpload: false, errorUpload: action.payload };
+
 
     default:
       return state;
@@ -148,6 +159,31 @@ export default function ProductEditScreen() {
       dispatch({ type: 'UPLOAD_FAIL', payload: getError(err) });
     }
   };
+  const uploadFileCatHandler = async (e, forimagecategory) => {
+    const file = e.target.files[0];
+    const bodyFormData = new FormData();
+    bodyFormData.append('file', file);
+    try {
+      dispatch({ type: 'UPLOADIMGCAT_REQUEST' });
+      const { data } = await axios.post('/api/upload/imageCategory', bodyFormData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+          authorization: `Bearer ${userInfo.token}`,
+        },
+      });
+      dispatch({ type: 'UPLOADIMGCAT_SUCCESS' });
+
+      if (forimagecategory) {
+        setImagecategory([...imagecategory, data.secure_url]);
+      } else {
+        setImagecategory(data.secure_url);
+      }
+      toast.success("Image ajoutée avec succés. cliquez sur Modifier pour l'appliquer");
+    } catch (err) {
+      toast.error(getError(err));
+      dispatch({ type: 'UPLOADIMGCAT_FAIL', payload: getError(err) });
+    }
+  };
   const deleteFileHandler = async (fileName, f) => {
     console.log(fileName, f);
     console.log(images);
@@ -238,15 +274,15 @@ export default function ProductEditScreen() {
               defaultValue={category}
             />
           </Form.Group>
-{/*           <Form.Group className="mb-3" controlId="imageFile">
-            <Form.Label>Télécharger l'image</Form.Label>
+           <Form.Group className="mb-3" controlId="imageFile">
+            <Form.Label>Télécharger l'image de la catégorie</Form.Label>
             
-            <Form.Control type="file" onChange={uploadFileHandlerCat}
+            <Form.Control type="file" onChange={uploadFileCatHandler}
           
             />
-             {image && <img style={{width:'30px'}} src={image} alt="Selected" />}
+             {imagecategory && <img style={{width:'30px'}} src={imagecategory} alt="Selected" />}
             {loadingUpload && <LoadingBox></LoadingBox>}
-          </Form.Group> */}
+          </Form.Group> 
 
           <Form.Group className="mb-3" controlId="description">
             <Form.Label>Description</Form.Label>

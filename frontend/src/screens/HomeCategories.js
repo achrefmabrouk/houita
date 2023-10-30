@@ -7,6 +7,7 @@ import { toast } from 'react-toastify';
 import { Link, useNavigate } from 'react-router-dom';
 
 const HomeCategories = () => {
+  
     const [categories, setCategories] = useState([]);
   useEffect(() => {
     const fetchCategories = async () => {
@@ -50,24 +51,27 @@ const HomeCategories = () => {
           clearInterval(scrollInterval);
         };
       }, []);
+
+
+
+      
  
   return (
     <div style={{marginTop:'200px',display:'flex',justifyContent:'center',flexWrap:'wrap', gap:'20px'}}>
- {/*        {categories.map((category) => (
+        {categories.map((category) => (
+           <Link className='lien' style={{textDecoration:'none'}} to={{pathname:"/search", search: `category`}}>
           <Card style={{ width: '18rem' }}>
-      
+         {/* <Card.Img style={{width:'100%'}} variant="top" src={imagecategory} /> */}
       <Card.Body >
         <Card.Title style={{display:'flex',justifyContent:'center'}}>{category}</Card.Title>
-         <div style={{display:'flex',justifyContent:'center'}}>
-         <Button  onClick={()=>{ navigate({pathname: '/search', search: `category=${category}`})}} variant="primary">Voir</Button>
-    
-         </div>
+         
         
       </Card.Body>
     </Card> 
-    ))} */}
+    </Link>
+    ))} 
     
-    <Link className='lien' style={{textDecoration:'none'}} to={{pathname:"/search", search: `category`}}>
+   {/* 
      <Card  style={{ width: '18rem' }}>
      <Card.Img style={{width:'100%'}} variant="top" src="poissiontranche.png" />
       <Card.Body >
@@ -118,7 +122,7 @@ const HomeCategories = () => {
        
       </Card.Body>
     </Card>
-    </Link>
+    </Link> */}
 
                <div className="horizontal-scroll-container">
                 <div className="content">
