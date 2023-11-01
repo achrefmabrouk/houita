@@ -122,23 +122,25 @@ Avec nos sauvages journaliers de poissons , crustacés , coquillages et fruits d
           }
         > 
             
-          <Nav className="flex-column text-white w-100 p-2 " style={{marginTop:'50px'}}>
+          <Nav className="flex-column text-white w-100 p-2 "  style={{marginTop:'50px'}}>
             <Nav.Item style={{color:'black', marginTop:'30px'}}>
               <strong ><h1 style={{color:'black',backgroundColor:'white'}}>Categories</h1></strong>
             </Nav.Item>
              {categories.map((category) => (
-              <Nav.Item key={category} >
+              <Nav.Item key={category.name} >
                 <LinkContainer
-                  to={{ pathname: '/search', search: `category=${category}` }}
+                  to={{ pathname: '/search', search: `category=${category.name}` }}
                   onClick={() => setSidebarIsOpen(false)}
                 >
-                  <Nav.Link >{category}</Nav.Link>
+                  <Nav.Link >{category.name}</Nav.Link>
                   
                 </LinkContainer>
                 
               </Nav.Item>
               
+              
             ))} 
+            <Nav.Link to='homescreen' >Tous les produits</Nav.Link>
 {/*               <Nav.Item >
               
                   <Nav.Link as={Link} to="/HomeCategories" >POISSONS EN TRANCHE</Nav.Link>
@@ -220,8 +222,12 @@ Avec nos sauvages journaliers de poissons , crustacés , coquillages et fruits d
         
         
 {/* <LinkContainer to="/"> */}
-            <Navbar.Brand>
-              <div style={{display:'flex',justifyContent:'space-between'}}> 
+            <Navbar.Brand style={{ width: '100%' }}>
+              <div style={{width: '100%', display:'flex',justifyContent:'space-between'}}> 
+            
+
+            
+              <div className='SideBar'  style={{display:'flex',alignContent:'center'}}> 
               <Button style={{display:'flex',justifyContent:'flex-start', backgroundColor:'#0D6EFD', borderColor:'#0D6EFD'}}
                 variant="dark"
                 onClick={() => setSidebarIsOpen(!sidebarIsOpen)}
@@ -230,8 +236,10 @@ Avec nos sauvages journaliers de poissons , crustacés , coquillages et fruits d
               </Button>
               
               {/* HOUITA  | حويته  */}
-            
-              <img style={{width:'20%'}} src='houita_logo.png'alt='logo'></img>
+              <Link to="/homescreen">
+              <img style={{height:'50px'}} src='houita_logo.png'alt='logo'></img>
+              </Link>
+              </div>
               
               
               <Navbar.Toggle aria-controls="basic-navbar-nav"> 

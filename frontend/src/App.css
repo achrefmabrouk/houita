@@ -36,3 +36,13 @@
     transform: rotate(360deg);
   }
 }
+
+
+@media screen and (max-width: 500px) {
+  .SideBar {
+      width: 100%; /* La sidebar occupe 100% de la largeur de l'écran */
+      height: auto; /* La hauteur s'ajuste automatiquement au contenu */
+      top: -100%; /* Masquez la sidebar horizontalement par défaut */
+      left: 0;
+  }
+}

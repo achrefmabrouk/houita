@@ -59,7 +59,7 @@ export default function DashboardScreen() {
         <MessageBox variant="danger">{error}</MessageBox>
       ) : (
         <>
-          <Row>
+          <Row style={{marginTop:'130px',marginBottom:'50px'}}>
           
             <Col md={4}>
               <Card>

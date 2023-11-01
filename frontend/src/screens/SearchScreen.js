@@ -156,7 +156,7 @@ export default function SearchScreen() {
                 <MessageBox >Aucun produit</MessageBox>
               )}
               </div>
-              <Row style={{marginTop:'100px'}}>
+              <Row style={{marginTop:'130px'}}>
                 {products.map((product) => (
                   <Col sm={6} lg={4} className="mb-3" key={product._id}>
                     <Product product={product}></Product>
@@ -165,24 +165,7 @@ export default function SearchScreen() {
               </Row>
               
               <div>
-                {[...Array(pages).keys()].map((x) => (
-                  <LinkContainer
-                    key={x + 1}
-                    className="mx-1"
-                    to={{
-                      pathname: '/search',
-                      seacrh: getFilterUrl({ page: x + 1 }, true),
-                    }}
-                  >
-                    <Button
-                      className={Number(page) === x + 1 ? 'text-bold' : ''}
-                      variant="light"
-                    >
-                      {x + 1}
-                    </Button>
-                    
-                  </LinkContainer>
-                ))}
+              
                  <Button style={{marginBottom:'30px'}}
                       type="button"
                       variant="primary"

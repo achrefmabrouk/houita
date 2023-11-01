@@ -20,7 +20,7 @@ productRouter.post(
       slug: 'sample-name-' + Date.now(),
       image: '/images/p1.jpg',
       price: 0,
-      category: 'CATEGORIE',
+      category: '',
       image_category:'/images/p2.jpg',
       brand: 'sample brand',
       countInStock: 0,
@@ -236,7 +236,15 @@ productRouter.get(
 productRouter.get(
   '/categories',
   expressAsyncHandler(async (req, res) => {
-    const categories = await Product.find().distinct('category');
+    const products = await Product.find();
+    let categories = [];
+
+    products.map(product => {
+      if (!categories.find(category => category.name === product.category)) {
+        categories.push({ name: product.category, url: product.imagecategory });
+      }
+    })
+
     res.send(categories);
   })
 );

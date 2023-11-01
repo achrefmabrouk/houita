@@ -12,7 +12,8 @@ const HomeCategories = () => {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const { data } = await axios.get(`/api/products/categories`);
+        const { data }= await axios.get(`/api/products/categories`);
+        console.log(data);
         setCategories(data);
       } catch (err) {
         toast.error(getError(err));
@@ -59,70 +60,17 @@ const HomeCategories = () => {
   return (
     <div style={{marginTop:'200px',display:'flex',justifyContent:'center',flexWrap:'wrap', gap:'20px'}}>
         {categories.map((category) => (
-           <Link className='lien' style={{textDecoration:'none'}} to={{pathname:"/search", search: `category`}}>
-          <Card style={{ width: '18rem' }}>
-         {/* <Card.Img style={{width:'100%'}} variant="top" src={imagecategory} /> */}
-      <Card.Body >
-        <Card.Title style={{display:'flex',justifyContent:'center'}}>{category}</Card.Title>
-         
-        
-      </Card.Body>
-    </Card> 
-    </Link>
-    ))} 
-    
-   {/* 
-     <Card  style={{ width: '18rem' }}>
-     <Card.Img style={{width:'100%'}} variant="top" src="poissiontranche.png" />
-      <Card.Body >
-        <Card.Title >POISSONS EN TRANCHES</Card.Title>
-        <Card.Text style={{textDecoration:'none'}}>
-          Some quick example text to build on the card title and make up the
-          bulk of the card's content.
-        </Card.Text>
-       
-      </Card.Body>
-    </Card>
-    </Link>
-    <Link className='lien' style={{textDecoration:'none'}} to="/">
-     <Card  style={{ width: '18rem' }}>
-     <Card.Img style={{width:'100%'}}  variant="top" src="fruitdemer.png" />
-      <Card.Body style={{backgroundImage:'fruits_de_mer.webp'}} >
-        <Card.Title >FRUITS DE MER </Card.Title>
-        <Card.Text style={{textDecoration:'none'}}>
-          Some quick example text to build on the card title and make up the
-          bulk of the card's content.
-        </Card.Text>
-       
-      </Card.Body>
-    </Card>
-    </Link>
-    <Link className='lien' style={{textDecoration:'none'}} to="/">
-     <Card   style={{ width: '18rem' }}>
-     <Card.Img style={{width:'100%'}}  variant="top" src="poissonbleue.png" />
-      <Card.Body  > 
-        <Card.Title style={{}} >POISSONS BLEUS </Card.Title>
-        <Card.Text style={{textDecoration:'none',Color:'black'}}>
-          Some quick example text to build on the card title and make up the
-          bulk of the card's content.
-        </Card.Text>
-       
-      </Card.Body>
-    </Card>
-    </Link>
-    <Link className='lien' style={{textDecoration:'none'}} to="/">
-     <Card   style={{ width: '18rem' }}>
-     <Card.Img style={{width:'100%'}}  variant="top" src="poissonblanc.png" />
-      <Card.Body  > 
-        <Card.Title style={{}} >POISSONS BLANCS</Card.Title>
-        <Card.Text style={{textDecoration:'none',Color:'black'}}>
-          Some quick example text to build on the card title and make up the
-          bulk of the card's content.
-        </Card.Text>
-       
-      </Card.Body>
-    </Card>
-    </Link> */}
+          <Link className='lien' style={{textDecoration:'none'}} to={{pathname:"/search", search: `category=${category.name}`}}>
+            <Card style={{ width: '18rem' }}>
+              <Card.Img style={{ width: '100%', height: '200px' }} variant="top" src={category.url} />
+              
+              <Card.Body>
+                <Card.Title style={{display:'flex',justifyContent:'center'}}>{category.name}</Card.Title>
+              </Card.Body>
+            </Card> 
+            </Link>
+          )
+        )}
 
                <div className="horizontal-scroll-container">
                 <div className="content">

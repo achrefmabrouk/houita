@@ -41,10 +41,11 @@ const updateCartHandler = async (item, quantity) => {
   });
 };
   return (
- 
-    <Card  >
+ <div  style={{display:'flex',justifyContent:'center',flexWrap:'wrap', gap:'20px'}} >
+    <Card style={{ width: '18rem' }} >
       <Link to={`/product/${product.slug}`}>
-        <img  src={product.image} className="card-img-top" alt={product.name} />
+      <Card.Img style={{ width: '100%', height: '200px' }} variant="top" src={product.image} />
+        {/* <img  src={product.image} className="card-img-top" alt={product.name} /> */}
       </Link>
       <Card.Body style={{textAlign:'center'}} >
         <Link style={{textDecoration:'none'}} to={`/product/${product.slug}`}>
@@ -69,6 +70,7 @@ const updateCartHandler = async (item, quantity) => {
         }
       </Card.Body>
     </Card>
+    </div>
     
   );
 }

@@ -117,9 +117,9 @@ function ProductScreen() {
     }
   };
   return loading ? (
-    <LoadingBox />
+    <LoadingBox style={{marginTop:'100px'}}/>
   ) : error ? (
-    <MessageBox variant="danger">{error}</MessageBox>
+    <MessageBox  variant="danger">{error}</MessageBox>
   ) : (
     <div style={{marginTop:'100px'}}>
       <Row>
@@ -144,9 +144,11 @@ function ProductScreen() {
             <ListGroup.Item>
              
             </ListGroup.Item>
-            <ListGroup.Item style={{fontWeight:'bold'}}>
+            <br/>
+            <br/>
+            <ListGroup.Item >
               Description:
-              <p>{product.description}</p>
+              <p style={{fontWeight:'bold',display:'flex',flexWrap:'wrap'}}>{product.description}</p>
             </ListGroup.Item>
             <ListGroup.Item style={{fontWeight:'bold'}}>
               {(product.disponible)?<p style={{color:'green'}}>DISPONIBLE</p>:<p style={{color:'red'}}>N'EST PAS DISPONIBLE</p>}
