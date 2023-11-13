@@ -6,7 +6,7 @@ node_modules
 .pnp.js
 
 
-BALOO/backend/.env
+backend/.env
 
 # testing
 /coverage
