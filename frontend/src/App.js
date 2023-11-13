@@ -140,19 +140,8 @@ Avec nos sauvages journaliers de poissons , crustacés , coquillages et fruits d
               
               
             ))} 
-            <Nav.Link to='homescreen' >Tous les produits</Nav.Link>
-{/*               <Nav.Item >
-              
-                  <Nav.Link as={Link} to="/HomeCategories" >POISSONS EN TRANCHE</Nav.Link>
-                  <Nav.Link as={Link} to="/HomeCategories" >FRUITS DE MER</Nav.Link>
-                  <Nav.Link as={Link} to="/HomeCategories" >POISSONS BLEUS</Nav.Link>
-                  <Nav.Link as={Link} to="/HomeCategories" >POISSONS BLANCS</Nav.Link>
-                  <Nav.Link as={Link} to="/homescreen" >Tous nos produits</Nav.Link>
-                  
-                  
-               
-                
-              </Nav.Item> */}
+            <Nav.Link as={Link} to='/homescreen'  onClick={() => setSidebarIsOpen(false)}>Tous les produits</Nav.Link>
+
              <Nav.Item style={{color:'black', marginTop:'30px'}}>
              
             </Nav.Item>
@@ -286,7 +275,7 @@ Avec nos sauvages journaliers de poissons , crustacés , coquillages et fruits d
         </header>
       
         <main class="main-content">
-          <Container className="mt-3">
+          <Container className="mt-3" >
             <Routes>
               <Route path="/product/:slug" element={<ProductScreen />} />
               <Route path="/cart" element={<CartScreen />} />

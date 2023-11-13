@@ -5,15 +5,20 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  font-family: loretta-display, serif;
+  font-family: Loretta Medium Italic Display  , serif;
 font-style: normal;
 font-weight: 200;
+
+
 }
 .site-container {
   min-height: 100vh;
 }
 main {
   flex: 1;
+  
+  background-image: url('../public/background.jpg');
+  background-size: cover;
   
 }
 .btn-primary,
@@ -112,3 +117,5 @@ footer {
 .lien{
   color: #000000;
 }
+
+  
