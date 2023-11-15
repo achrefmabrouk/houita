@@ -2,10 +2,9 @@
 
 # dependencies
 node_modules
-/.pnp
-.pnp.js
-houita/backend/.env
-
+# /.pnp
+# .pnp.js
+backend/.env
 backend/data.js
 
 
