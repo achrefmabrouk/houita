@@ -4,8 +4,8 @@
 node_modules
 # /.pnp
 # .pnp.js
-backend/.env
-backend/data.js
+/backend/.env
+/backend/data.js
 
 
 
