@@ -4,8 +4,14 @@
 node_modules
 /.pnp
 .pnp.js
-/.env
-/data.js
+backend/.env
+backend/data.js
+
+
+
+
+
+
 # testing
 /coverage
 
