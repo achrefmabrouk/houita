@@ -4,7 +4,8 @@
 node_modules
 /.pnp
 .pnp.js
-backend/.env
+houita/backend/.env
+
 backend/data.js
 
 
